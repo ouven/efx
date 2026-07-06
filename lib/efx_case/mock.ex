@@ -14,7 +14,7 @@ defmodule EfxCase.Mock do
 
   defmodule MockedFun do
     @moduledoc !"""
-               Internal logic of a mocked function. 
+               Internal logic of a mocked function.
 
                A mocked functions consists of the following:
 
@@ -22,7 +22,7 @@ defmodule EfxCase.Mock do
                - the arity of the function
                - the implementation/replacement of the function. Besides an
                  anonymous function this can be :unmocked or :default.
-                 :unmocked says there is no replacement yet and error when called 
+                 :unmocked says there is no replacement yet and error when called
                  :default refers to the default implementation
                - a number of expected calls
                - a counter showing how the mocked functions has been called
@@ -95,10 +95,10 @@ defmodule EfxCase.Mock do
   end
 
   @spec inc_called(Mock.t(), atom(), arity()) :: Mock.t()
-  def inc_called(mock, name, arity) do
+  def inc_called(%Mock{} = mock, name, arity) do
     {:done, funs} =
       Enum.reduce(mock.mocked_funs, {:continue, []}, fn
-        fun, {:continue, funs} ->
+        %MockedFun{} = fun, {:continue, funs} ->
           if fun.name == name && fun.arity == arity && !MockedFun.limit_reached?(fun) do
             new_fun = %MockedFun{fun | num_calls: fun.num_calls + 1}
             {:done, [new_fun | funs]}
@@ -125,7 +125,7 @@ defmodule EfxCase.Mock do
   end
 
   @spec delete_when_unmocked(Mock.t(), atom(), non_neg_integer()) :: Mock.t()
-  defp delete_when_unmocked(mock, name, arity) do
+  defp delete_when_unmocked(%Mock{} = mock, name, arity) do
     %Mock{
       mock
       | mocked_funs:

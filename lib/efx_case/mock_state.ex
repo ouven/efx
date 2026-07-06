@@ -17,8 +17,6 @@ defmodule EfxCase.MockState do
   alias EfxCase.Mock.MockedFun
   alias ExUnit.Assertions
 
-  require ExUnit.Assertions
-
   use Agent
 
   @typedoc """

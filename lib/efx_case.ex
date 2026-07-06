@@ -207,15 +207,13 @@ defmodule EfxCase do
   to have fresh bindings for each iteration. To achieve that we can run the
   tests as follows:
 
-      check all data <- my_generator do 
+      check all data <- my_generator do
         with_clean_bindings(fn ->
           # implement bindings here
           ...
         )
       end
   """
-
-  require Logger
 
   alias EfxCase.Internal
   alias EfxCase.MockState

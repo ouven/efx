@@ -40,7 +40,7 @@ defmodule Efx.MixProject do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:typed_struct, "~> 0.3.0"},
-      {:process_tree, "0.2.1"}
+      {:process_tree, "~> 0.2.0 or ~> 0.3.0"}
     ]
   end
 
